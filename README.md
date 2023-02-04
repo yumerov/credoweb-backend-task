@@ -25,11 +25,12 @@ Currently tested only on Windows 10(and git bash)!
 - - [ ] ORM install
 - [ ] Config loading
 - [ ] Routing
+- - [ ] Core
 - - [ ] Handling JSON requests
 - - [ ] JSON Responses
 - [ ] Validations and sanitization
 - [ ] Swagger
 - [ ] Containerize using Docker
 - [ ] Tests
-- - [ ] Units tests
+- - [x] Units tests
 - - [ ] Endpoint tests
