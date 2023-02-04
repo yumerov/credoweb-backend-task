@@ -7,11 +7,11 @@ This solution is a mix of a prototype MVC framework and its usage.
 Currently tested only on Windows 10(and git bash)!
 
 - Install the dependencies `composer install`
-- Run the server `php -S localhost:8000`
+- Run the server `composer run-script serve`
 
 ## Commands
 
-- Tests `./vendor/bin/phpunit --coverage-text`
+- Tests `composer run-script test`
 - List routes `php bin/routes`
 
 ## TODO

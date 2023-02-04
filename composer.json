@@ -23,5 +23,9 @@
         "phpunit/phpunit": "^10.0",
         "phpunit/php-code-coverage": "^10.0",
         "ext-xdebug": "^3.2"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit --coverage-text",
+        "serve": "php -S localhost:8000"
     }
 }
