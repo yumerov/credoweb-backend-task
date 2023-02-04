@@ -17,6 +17,7 @@ Currently tested only on Windows 10(and git bash)!
 ## TODO
 
 - [ ] Logger
+- [x] Container/DI
 - [ ] Data
 - - [ ] Migration SQL
 - - [ ] Running migrations on app run or cli
@@ -24,10 +25,12 @@ Currently tested only on Windows 10(and git bash)!
 - - [ ] DSN config
 - - [ ] ORM install
 - [ ] Config loading
-- [ ] Routing
-- - [ ] Core
+- [ ] Env handling mechanism
+- [ ] Routing/Http
+- - [x] Core
 - - [ ] Handling JSON requests
-- - [ ] JSON Responses
+- - [x] JSON Responses
+- - [ ] Upgrade to PHP8 attribute parsing instead of plain php array
 - [ ] Validations and sanitization
 - [ ] Swagger
 - [ ] Containerize using Docker

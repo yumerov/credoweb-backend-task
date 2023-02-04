@@ -6,7 +6,10 @@ use FastRoute\RouteCollector;
 use Yumerov\CredowebBackendTask\Response\ResponseHandler;
 
 class Dispatcher {
-    public function __construct(private Router $router) { }
+    public function __construct(
+        private Router $router,
+        private ResponseHandler $responseHandler
+    ) { }
 
     public function dispatch()
     {
@@ -34,7 +37,7 @@ class Dispatcher {
                 list($class, $method) = $routeInfo[1];
                 $vars = $routeInfo[2];
                 $response = call_user_func_array([new $class(), $method], $vars);
-                (new ResponseHandler())->handle($response);
+                $this->responseHandler->handle($response);
         }
     }
 
