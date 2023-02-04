@@ -3,22 +3,14 @@
 namespace Yumerov\CredowebBackendTask\Routing;
 
 use FastRoute\RouteCollector;
+use Yumerov\CredowebBackendTask\Response\ResponseHandler;
 
 class Dispatcher {
     public function __construct(private Router $router) { }
 
     public function dispatch()
     {
-        $routes = $this->router->parseRoutes();
-        $dispatcher = \FastRoute\simpleDispatcher(function (RouteCollector $r) use ($routes) {
-            foreach ($routes as $route) {
-                $r->addRoute(
-                    $route->getHttpMethod(),
-                    $route->getRoute(),
-                    $route->getHandler()
-                );
-            }
-        });
+        $dispatcher = $this->registerRoutes();
 
         $httpMethod = $_SERVER['REQUEST_METHOD'];
         $uri = $_SERVER['REQUEST_URI'];
@@ -39,10 +31,24 @@ class Dispatcher {
                 // ... 405 Method Not Allowed
                 break;
             case \FastRoute\Dispatcher::FOUND:
-                $handler = $routeInfo[1];
+                list($class, $method) = $routeInfo[1];
                 $vars = $routeInfo[2];
-                var_dump($handler, $vars);
-                break;
+                $response = call_user_func_array([new $class(), $method], $vars);
+                (new ResponseHandler())->handle($response);
         }
+    }
+
+    private function registerRoutes(): \FastRoute\Dispatcher
+    {
+        $routes = $this->router->parseRoutes();
+        return \FastRoute\simpleDispatcher(function (RouteCollector $r) use ($routes) {
+            foreach ($routes as $route) {
+                $r->addRoute(
+                    $route->getHttpMethod(),
+                    $route->getRoute(),
+                    $route->getHandler()
+                );
+            }
+        });
     }
 }
