@@ -14,9 +14,8 @@ Currently tested only on Windows 10(and git bash)!
 - Tests `composer run-script test`
 - List routes `php bin/routes`
 
-## TODO
+## Priority TODOs
 
-- [ ] Logger
 - [x] Container/DI
 - [ ] Data
 - - [ ] Migration SQL
@@ -31,9 +30,13 @@ Currently tested only on Windows 10(and git bash)!
 - - [ ] Handling JSON requests
 - - [x] JSON Responses
 - - [ ] Upgrade to PHP8 attribute parsing instead of plain php array
+
+## Improvements
+
+- [ ] Logger
 - [ ] Validations and sanitization
 - [ ] Swagger
-- [ ] Containerize using Docker
 - [ ] Tests
 - - [x] Units tests
 - - [ ] Endpoint tests
+- [ ] Containerize using Docker
