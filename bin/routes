@@ -1,0 +1,13 @@
+<?php
+
+$rootDir = dirname(__DIR__);
+
+require $rootDir . '/vendor/autoload.php';
+
+use Yumerov\CredowebBackendTask\Routing\Router;
+
+$routes = (new Router($rootDir))->parseRoutes();
+
+foreach ($routes as $route) {
+    echo "HTTP Verb: {$route->getHttpMethod()} | Route: {$route->getRoute()} | Handler: | " . var_export($route->getHandler(), true);
+}
