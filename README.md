@@ -33,6 +33,19 @@ Currently tested only on Windows 10(and git bash)!
 - - [ ] Handling JSON requests
 - - [x] JSON Responses
 - - [ ] Upgrade to PHP8 attribute parsing instead of plain php array
+- [ ] Endpoints
+- - [ ] Hospital
+- - - [ ] Create
+- - - [ ] Read
+- - - [ ] Update
+- - - [ ] Delete
+- - - [ ] List hopsitals - ability to order them by employees count
+- - [ ] Users
+- - - [ ] Create
+- - - [ ] Read
+- - - [ ] Update
+- - - [ ] Delete
+- - - [ ] List hopsitals - ability to search them by workplace and title
 
 ## Improvements
 
