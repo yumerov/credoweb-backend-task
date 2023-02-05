@@ -1,0 +1,20 @@
+<?php
+
+use Yumerov\CredowebBackendTask\DataLayer;
+use Yumerov\CredowebBackendTask\Entity\Hospital;
+
+$rootDir = dirname(__DIR__);
+
+require $rootDir . '/vendor/autoload.php';
+
+$faker = \Faker\Factory::create();
+$entityManager = (new DataLayer($rootDir))->init();
+
+for ($index = 0; $index < 10; $index++)
+{
+    $hospital = new Hospital();
+    $hospital->setName("{$faker->name()} Hospital");
+    $hospital->setAddress($faker->address());
+    $hospital->setPhone($faker->phoneNumber());
+    $entityManager->persist($hospital);
+}

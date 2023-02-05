@@ -12,6 +12,7 @@ Currently tested only on Windows 10(and git bash)!
 ## Commands
 
 - Sync the database structure `php bin/dbsync`
+- Fill the database with some test data `php bin/dbseed`
 - Tests `composer run-script test`
 - List routes `php bin/routes`
 - Run the server `composer run-script serve`

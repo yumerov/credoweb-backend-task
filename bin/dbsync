@@ -35,6 +35,5 @@ try {
         ;
     }
 } catch (\Exception $ex) {
-
     echo "FAILED: {$ex->getMessage()}\n";
 }
