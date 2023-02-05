@@ -8,4 +8,5 @@ require 'vendor/autoload.php';
 
 Application::builder()
     ->setContainer((new ContainerLoader(__DIR__, new Container()))->load())
+    ->initDataLayer()
     ->run();

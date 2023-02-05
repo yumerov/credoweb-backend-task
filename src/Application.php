@@ -2,6 +2,7 @@
 
 namespace Yumerov\CredowebBackendTask;
 
+use Doctrine\ORM\EntityManager;
 use League\Container\Container;
 use Yumerov\CredowebBackendTask\Routing\Dispatcher;
 
@@ -17,6 +18,16 @@ final class Application {
     public function setContainer(Container $container): Application
     {
         $this->container = $container;
+
+        return $this;
+    }
+
+    public function initDataLayer()
+    {
+        $entityManager = $this->container->get(DataLayer::class)->init();
+        $this->container->add(EntityManager::class, function () use ($entityManager) {
+            return $entityManager;
+        });
 
         return $this;
     }
