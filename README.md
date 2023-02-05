@@ -34,6 +34,7 @@ Currently tested only on Windows 10(and git bash)!
 ## Improvements
 
 - [ ] Logger
+- [ ] Better namespace structure
 - [ ] Validations and sanitization
 - [ ] Swagger
 - [ ] Tests
