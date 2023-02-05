@@ -7,22 +7,25 @@ This solution is a mix of a prototype MVC framework and its usage.
 Currently tested only on Windows 10(and git bash)!
 
 - Install the dependencies `composer install`
-- Run the server `composer run-script serve`
+- Requires a working postgres instance with database "hospitals" grated access to user "postgres" and password "postgres"
 
 ## Commands
 
+- Sync the database structure `php bin/dbsync`
 - Tests `composer run-script test`
 - List routes `php bin/routes`
+- Run the server `composer run-script serve`
 
 ## Priority TODOs
 
 - [x] Container/DI
 - [ ] Data
-- - [ ] Migration SQL
-- - [ ] Running migrations on app run or cli
+- - [x] Migration SQL
+- - [x] Running migrations on app run or cli
+- - [ ] Entities
 - - [ ] Seed
-- - [ ] DSN config
-- - [ ] ORM install
+- - [x] DSN config
+- - [x] ORM install
 - [ ] Config loading
 - [ ] Env handling mechanism
 - [ ] Routing/Http
@@ -34,6 +37,7 @@ Currently tested only on Windows 10(and git bash)!
 ## Improvements
 
 - [ ] Logger
+- [ ] Exceptions
 - [ ] Better namespace structure
 - [ ] Validations and sanitization
 - [ ] Swagger
