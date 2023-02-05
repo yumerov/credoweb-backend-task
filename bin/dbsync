@@ -1,0 +1,40 @@
+<?php
+
+use Yumerov\CredowebBackendTask\DataLayer;
+
+$rootDir = dirname(__DIR__);
+
+require $rootDir . '/vendor/autoload.php';
+
+$entityManager = (new DataLayer($rootDir))->init();
+
+// TODO: move to a sql file
+$sqls = [
+    "CREATE TABLE IF NOT EXISTS hospitals (
+        id serial PRIMARY KEY,
+        name varchar(100) NOT NULL,
+        address varchar(255) NOT NULL,
+        phone varchar(20) NOT NULL);",
+    "CREATE TYPE user_type AS ENUM ('patient', 'doctor');",
+    "CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        first_name VARCHAR(255) NOT NULL,
+        last_name VARCHAR(255) NOT NULL,
+        type user_type NOT NULL,
+        workplace_id INTEGER REFERENCES hospitals (id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    );"];
+
+try {
+    foreach ($sqls as $sql) {
+        $entityManager
+            ->getConnection()
+            ->prepare($sql)
+            ->executeStatement()
+        ;
+    }
+} catch (\Exception $ex) {
+
+    echo "FAILED: {$ex->getMessage()}\n";
+}
