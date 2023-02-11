@@ -22,6 +22,12 @@ Currently tested only on Windows 10(and git bash)!
 - Using php instead of yaml to save dev time
 - Using sql queries instead of Doctrine entities to save dev time
 - Using same database for dev and testing purposes
+- Using json instead of annotations to save dev time
+
+## Testing
+
+- Swagger: http://localhost:8000/swagger/index.html
+- cli: `composer run-script test`
 
 ## Priority TODOs
 
@@ -43,7 +49,7 @@ Currently tested only on Windows 10(and git bash)!
 - [ ] Endpoints
 - - [ ] Hospital
 - - - [ ] Create
-- - - [ ] Read
+- - - [x] Read
 - - - [ ] Update
 - - - [ ] Delete
 - - - [ ] List hopsitals - ability to order them by employees count
@@ -60,7 +66,7 @@ Currently tested only on Windows 10(and git bash)!
 - [ ] Exceptions
 - [ ] Better namespace structure
 - [ ] Validations and sanitization
-- [ ] Swagger
+- [x] Swagger
 - [ ] Tests
 - - [x] Units tests
 - - [ ] Endpoint tests
