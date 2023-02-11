@@ -38,7 +38,7 @@ class User
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hospital")
+     * @ORM\ManyToOne(targetEntity=Hospital::class)
      * @ORM\JoinColumn(nullable=true)
      */
     private $workplace;

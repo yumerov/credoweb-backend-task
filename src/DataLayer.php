@@ -16,7 +16,8 @@ class DataLayer {
         $ds = DIRECTORY_SEPARATOR;
 
         $isDevMode = true;
-        $config = Setup::createAnnotationMetadataConfiguration(["{$this->rootDir}{$ds}src"], $isDevMode);
+        $config = Setup::createAnnotationMetadataConfiguration(
+            ["{$this->rootDir}{$ds}src{$ds}entity"], $isDevMode);
 
         $connection = require("{$this->rootDir}{$ds}config{$ds}database.php");
 

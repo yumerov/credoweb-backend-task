@@ -1,20 +1,30 @@
 <?php
 
 use Yumerov\CredowebBackendTask\DataLayer;
-use Yumerov\CredowebBackendTask\Entity\Hospital;
+use Yumerov\CredowebBackendTask\Factory\HospitalFactory;
+use Yumerov\CredowebBackendTask\Factory\UserFactory;
+use Yumerov\CredowebBackendTask\Service\HospitalService;
+use Yumerov\CredowebBackendTask\Service\UserService;
 
 $rootDir = dirname(__DIR__);
 
 require $rootDir . '/vendor/autoload.php';
 
-$faker = \Faker\Factory::create();
 $entityManager = (new DataLayer($rootDir))->init();
+$generator = \Faker\Factory::create();
+$hospitalFactory = new HospitalFactory($generator);
+$hotelService = new HospitalService($entityManager);
+$userFactory = new UserFactory($generator);
+$userService  = new UserService($entityManager);
 
-for ($index = 0; $index < 10; $index++)
+for ($index = 0; $index < 5; $index++)
 {
-    $hospital = new Hospital();
-    $hospital->setName("{$faker->name()} Hospital");
-    $hospital->setAddress($faker->address());
-    $hospital->setPhone($faker->phoneNumber());
-    $entityManager->persist($hospital);
+    $hotelService->save($hospitalFactory->get());
+    $hospitalId = $entityManager
+        ->getConnection()
+        ->executeQuery("SELECT id FROM hospitals ORDER BY RANDOM() LIMIT 1")
+        ->fetchOne();
+    $userService->save($userFactory->get($hospitalId));
 }
+
+echo "Database has beed seeded";

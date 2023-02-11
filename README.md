@@ -17,6 +17,11 @@ Currently tested only on Windows 10(and git bash)!
 - List routes `php bin/routes`
 - Run the server `composer run-script serve`
 
+## Design decision:
+
+- Using php instead of yaml to save dev time
+- Using sql queries instead of Doctrine entities to save dev time
+
 ## Priority TODOs
 
 - [x] Container/DI

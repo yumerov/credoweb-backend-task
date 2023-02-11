@@ -5,9 +5,10 @@ namespace Yumerov\CredowebBackendTask\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Yumerov\CredowebBackendTask\Repository\HospitalRepository;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=HospitalRepository::class)
  * @ORM\Table(name="hospitals")
  */
 class Hospital
@@ -47,6 +48,13 @@ class Hospital
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): ?string
