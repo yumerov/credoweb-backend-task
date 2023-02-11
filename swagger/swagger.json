@@ -8,6 +8,13 @@
         "/api/hospitals/{id}": {
             "get": {
                 "summary": "Get hospital by ID",
+                "tags": ["Hospital"],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -20,7 +27,7 @@
                     "200": {
                         "description": "Found",
                         "schema": {
-                            "$ref": "#/definitions/Hospital"
+                            "$ref": "#/definitions/ReadHospital"
                         }
                     },
                     "404": {
@@ -31,10 +38,48 @@
                     }
                 }
             }
+        },
+        "/api/hospitals": {
+            "post": {
+                "summary": "Create Hospital",
+                "tags": [
+                    "Hospital"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateHospital"
+                        }
+                    }
+                ],
+            }
         }
     },
     "definitions": {
-        "Hospital": {
+        "CreateHospital": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                }
+            }
+        },
+        "ReadHospital": {
             "type": "object",
             "properties": {
                 "id": {

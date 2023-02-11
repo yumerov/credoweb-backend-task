@@ -49,7 +49,9 @@ class Dispatcher {
             case \FastRoute\Dispatcher::FOUND:
                 list($class, $method) = $routeInfo[1];
                 $vars = $routeInfo[2];
-                $action = [$this->container->get($class), $method];
+                $controller = $this->container->get($class);
+                $controller->setRequest(json_decode(file_get_contents('php://input')));
+                $action = [$controller, $method];
                 $response = call_user_func_array($action, $vars);
                 $this->responseHandler->handle($response);
         }
