@@ -18,7 +18,6 @@ class ContainerLoader {
 
         foreach ($services as $service => $dependencies) {
             $this->container->add($service)->addArguments($dependencies);
-            $this->container->get($service);
         }
 
         return $this->container;

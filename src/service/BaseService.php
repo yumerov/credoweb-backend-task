@@ -2,11 +2,11 @@
 
 namespace Yumerov\CredowebBackendTask\Service;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManager;
 
 abstract class BaseService 
 {
     public function __construct(
-        protected EntityManagerInterface $entityManager
+        protected EntityManager $entityManager
     ) { }
 }

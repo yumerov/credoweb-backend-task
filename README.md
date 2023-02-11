@@ -21,15 +21,16 @@ Currently tested only on Windows 10(and git bash)!
 
 - Using php instead of yaml to save dev time
 - Using sql queries instead of Doctrine entities to save dev time
+- Using same database for dev and testing purposes
 
 ## Priority TODOs
 
 - [x] Container/DI
-- [ ] Data
+- [x] Data
 - - [x] Migration SQL
 - - [x] Running migrations on app run or cli
-- - [ ] Entities
-- - [ ] Seed
+- - [x] Entities
+- - [x] Seed
 - - [x] DSN config
 - - [x] ORM install
 - [ ] Config loading

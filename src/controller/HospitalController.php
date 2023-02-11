@@ -2,17 +2,23 @@
 
 namespace Yumerov\CredowebBackendTask\Controller;
 
+use Yumerov\CredowebBackendTask\Response\HospitalJson;
+use Yumerov\CredowebBackendTask\Response\NotFoundJson;
 use Yumerov\CredowebBackendTask\Response\Response;
+use Yumerov\CredowebBackendTask\Service\HospitalService;
 
-class HospitalController extends Controller {
+class HospitalController {
+
+    public function __construct(private HospitalService $service) { }
 
     public function read(int $id): Response
     {
-        return new Response([
-            'id' => 2,
-            'name' => 'Test hospital',
-            'address' => 'Test address',
-            'phone' => '+359 898 123 123'
-        ]);
+        $hospital = $this->service->get($id);
+
+        if ($hospital === null) {
+            return (new NotFoundJson())->getResponse();
+        }
+
+        return (new HospitalJson($hospital))->getResponse();
     }
 }

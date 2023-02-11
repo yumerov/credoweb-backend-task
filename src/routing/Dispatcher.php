@@ -2,14 +2,27 @@
 
 namespace Yumerov\CredowebBackendTask\Routing;
 
+use Doctrine\ORM\EntityManager;
 use FastRoute\RouteCollector;
+use League\Container\Container;
 use Yumerov\CredowebBackendTask\Response\ResponseHandler;
+use Yumerov\CredowebBackendTask\Service\HospitalService;
 
 class Dispatcher {
+
+    private Container $container;
+
     public function __construct(
         private Router $router,
         private ResponseHandler $responseHandler
     ) { }
+
+    public function setContainer(Container $container): self
+    {
+        $this->container = $container;
+
+        return $this;
+    }
 
     public function dispatch()
     {
@@ -36,7 +49,8 @@ class Dispatcher {
             case \FastRoute\Dispatcher::FOUND:
                 list($class, $method) = $routeInfo[1];
                 $vars = $routeInfo[2];
-                $response = call_user_func_array([new $class(), $method], $vars);
+                $action = [$this->container->get($class), $method];
+                $response = call_user_func_array($action, $vars);
                 $this->responseHandler->handle($response);
         }
     }
