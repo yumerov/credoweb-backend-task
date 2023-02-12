@@ -51,12 +51,12 @@ Currently tested only on Windows 10(and git bash)!
 - - - [x] Update
 - - - [x] Delete
 - - - [x] List hopsitals - ability to order them by employees count
-- - [ ] Users
+- - [x] Users
 - - - [ ] Create
 - - - [x] Read
 - - - [ ] Update
 - - - [x] Delete
-- - - [ ] List hopsitals - ability to search them by workplace and title
+- - - [x] List hopsitals - ability to search them by workplace and title
 
 ## Improvements
 

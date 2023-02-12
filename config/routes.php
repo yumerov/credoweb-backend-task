@@ -13,4 +13,5 @@ return [
     ['GET', '/api/users/{id}', [UserController::class, 'read']],
     ['POST', '/api/users', [UserController::class, 'create']],
     ['DELETE', '/api/users/{id}', [UserController::class, 'delete']],
+    ['GET', '/api/users', [UserController::class, 'list']],
 ];

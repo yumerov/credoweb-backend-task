@@ -7,6 +7,7 @@ use Yumerov\CredowebBackendTask\Response\EmptyJson;
 use Yumerov\CredowebBackendTask\Response\NotFoundJson;
 use Yumerov\CredowebBackendTask\Response\Response;
 use Yumerov\CredowebBackendTask\Response\UserJson;
+use Yumerov\CredowebBackendTask\Response\UserListJson;
 use Yumerov\CredowebBackendTask\Service\UserService;
 
 class UserController extends Controller
@@ -47,5 +48,14 @@ class UserController extends Controller
         $this->service->delete($id);
 
         return (new EmptyJson())->getResponse();
+    }
+
+    public function list(): Response
+    {
+        $workplace = isset($_GET['workplace']) ? $_GET['workplace'] : null;
+
+        $users = $this->service->list($workplace);
+
+        return (new UserListJson($users))->getResponse();
     }
 }

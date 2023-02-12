@@ -5,8 +5,11 @@ namespace Yumerov\CredowebBackendTask\Service;
 use Yumerov\CredowebBackendTask\Entity\Hospital;
 use Yumerov\CredowebBackendTask\Entity\User;
 use Yumerov\CredowebBackendTask\Interfaces\UserInterface;
+use Yumerov\CredowebBackendTask\Trait\UserTrait;
 
 class UserService extends BaseService {
+
+    use UserTrait;
 
     public function get(int $id): ?User
     {
@@ -35,31 +38,7 @@ class UserService extends BaseService {
             return null;
         }
 
-        $hopsital = null;
-        if ($result['h_id'] !== null) {
-            $hopsital = new Hospital();
-            $hopsital
-                ->setId($result['h_id'])
-                ->setName($result['h_name'])
-                ->setAddress($result['h_address'])
-                ->setPhone($result['h_phone']);
-        }
-
-        $createdAt = \DateTime::createFromFormat(
-            'Y-m-d H:i:s.u',
-            $result['u_created_at']
-        );
-        $user = (new User())
-            ->setId($result['u_id'])
-            ->setEmail($result['u_email'])
-            ->setFirstName($result['u_first_name'])
-            ->setLastName($result['u_last_name'])
-            ->setType($result['u_type'])
-            ->setCreatedAt($createdAt)
-            ->setWorkplace($hopsital)
-        ;
-
-        return $user;
+        return $this->assocArrayToInstance($result);
     }
 
     public function save(UserInterface $user): User
@@ -87,5 +66,31 @@ class UserService extends BaseService {
             ->prepare('DELETE FROM users WHERE id = :id');
         $statement->bindValue(':id', $id);
         $statement->executeQuery();
+    }
+
+    public function list(?int $workplace): array
+    {
+        $sql = "SELECT"
+            . " u.id AS u_id,"
+            . " u.email AS U_email,"
+            . " u.first_name AS u_first_name,"
+            . " u.last_name AS u_last_name,"
+            . " u.type AS u_type,"
+            . " u.created_at AS u_created_at,"
+            . " h.id AS h_id,"
+            . " h.name AS h_name,"
+            . " h.address AS h_address,"
+            . " h.phone AS h_phone"
+            . " FROM users as U"
+            . " LEFT JOIN hospitals AS h ON h.id = u.workplace_id"
+            . " WHERE (u.workplace_id = :workplace OR :workplace IS NULL)";
+
+        $statement = $this->entityManager
+            ->getConnection()
+            ->prepare($sql);
+
+        $statement->bindValue(':workplace', $workplace);
+
+        return $statement->executeQuery()->fetchAllAssociative();
     }
 }

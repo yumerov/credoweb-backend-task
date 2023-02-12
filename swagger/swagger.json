@@ -253,6 +253,29 @@
                         }
                     }
                 ]
+            },
+            "get": {
+                "summary": "List Users",
+                "tags": [
+                    "User"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "workplace",
+                        "in": "query",
+                        "description": "Workplace id",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ]
             }
         }
     },
