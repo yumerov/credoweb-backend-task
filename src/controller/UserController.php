@@ -2,6 +2,7 @@
 
 namespace Yumerov\CredowebBackendTask\Controller;
 
+use Yumerov\CredowebBackendTask\Response\EmptyJson;
 use Yumerov\CredowebBackendTask\Response\NotFoundJson;
 use Yumerov\CredowebBackendTask\Response\Response;
 use Yumerov\CredowebBackendTask\Response\UserJson;
@@ -23,5 +24,18 @@ class UserController extends Controller
         }
 
         return (new UserJson($user))->getResponse();
+    }
+
+    public function delete(int $id): Response
+    {
+        $user = $this->service->get($id);
+
+        if ($user === null) {
+            return (new NotFoundJson())->getResponse();
+        }
+
+        $this->service->delete($id);
+
+        return (new EmptyJson())->getResponse();
     }
 }

@@ -53,9 +53,9 @@ Currently tested only on Windows 10(and git bash)!
 - - - [x] List hopsitals - ability to order them by employees count
 - - [ ] Users
 - - - [ ] Create
-- - - [ ] Read
+- - - [x] Read
 - - - [ ] Update
-- - - [ ] Delete
+- - - [x] Delete
 - - - [ ] List hopsitals - ability to search them by workplace and title
 
 ## Improvements

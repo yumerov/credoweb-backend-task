@@ -74,4 +74,13 @@ class UserService extends BaseService {
         $statement->bindValue(':workplace', $user->getWorkplace() ? $user->getWorkplace()->getId() : null);
         $statement->executeQuery();
     }
+
+    public function delete(int $id): void
+    {
+        $statement = $this->entityManager
+            ->getConnection()
+            ->prepare('DELETE FROM users WHERE id = :id');
+        $statement->bindValue(':id', $id);
+        $statement->executeQuery();
+    }
 }
