@@ -40,15 +40,13 @@ Currently tested only on Windows 10(and git bash)!
 - - [x] DSN config
 - - [x] ORM install
 - [ ] Config loading
-- [ ] Env handling mechanism
-- [ ] Routing/Http
+- [x] Routing/Http
 - - [x] Core
-- - [ ] Handling JSON requests
+- - [x] Handling JSON requests
 - - [x] JSON Responses
-- - [ ] Upgrade to PHP8 attribute parsing instead of plain php array
 - [ ] Endpoints
 - - [ ] Hospital
-- - - [ ] Create
+- - - [x] Create
 - - - [x] Read
 - - - [ ] Update
 - - - [ ] Delete
@@ -64,9 +62,12 @@ Currently tested only on Windows 10(and git bash)!
 
 - [ ] Logger
 - [ ] Exceptions
+- [ ] Env handling mechanism
 - [ ] Better namespace structure
 - [ ] Validations and sanitization
 - [x] Swagger
+- [ ] Routing/Http
+- - [ ] Upgrade to PHP8 attribute parsing instead of plain php array
 - [ ] Tests
 - - [x] Units tests
 - - [ ] Endpoint tests

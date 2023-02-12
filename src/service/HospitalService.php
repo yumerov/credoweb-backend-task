@@ -3,6 +3,8 @@
 namespace Yumerov\CredowebBackendTask\Service;
 
 use Yumerov\CredowebBackendTask\Entity\Hospital;
+use Yumerov\CredowebBackendTask\Interfaces\HospitalInterface;
+use Yumerov\CredowebBackendTask\Request\SaveHospital;
 
 class HospitalService extends BaseService {
 
@@ -27,7 +29,7 @@ class HospitalService extends BaseService {
         return $hospital;
     }
 
-    public function save(Hospital $hospital)
+    public function save(HospitalInterface $hospital): Hospital
     {
         $statement = $this->entityManager
             ->getConnection()
@@ -37,5 +39,12 @@ class HospitalService extends BaseService {
         $statement->bindValue(':address', $hospital->getAddress());
         $statement->bindValue(':phone', $hospital->getPhone());
         $statement->executeQuery();
+
+        $savedHospital = new Hospital();
+        $savedHospital->setId($this->entityManager->getConnection()->lastInsertId());
+        $savedHospital->setName($hospital->getName());
+        $savedHospital->setAddress($hospital->getAddress());
+        $savedHospital->setPhone($hospital->getPhone());
+        return $savedHospital;
     }
 }

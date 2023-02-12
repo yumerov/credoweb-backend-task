@@ -5,13 +5,14 @@ namespace Yumerov\CredowebBackendTask\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Yumerov\CredowebBackendTask\Interfaces\HospitalInterface;
 use Yumerov\CredowebBackendTask\Repository\HospitalRepository;
 
 /**
  * @ORM\Entity(repositoryClass=HospitalRepository::class)
  * @ORM\Table(name="hospitals")
  */
-class Hospital
+class Hospital implements HospitalInterface
 {
     /**
      * @ORM\Id
