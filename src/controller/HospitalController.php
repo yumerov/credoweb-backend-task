@@ -4,6 +4,7 @@ namespace Yumerov\CredowebBackendTask\Controller;
 
 use Yumerov\CredowebBackendTask\Request\SaveHospital;
 use Yumerov\CredowebBackendTask\Response\CreatedHospitalJson;
+use Yumerov\CredowebBackendTask\Response\EmptyJson;
 use Yumerov\CredowebBackendTask\Response\HospitalJson;
 use Yumerov\CredowebBackendTask\Response\InvalidJson;
 use Yumerov\CredowebBackendTask\Response\NotFoundJson;
@@ -61,5 +62,18 @@ class HospitalController extends Controller {
         $updatedHospital = $this->service->update($foundHospital, $saveHospital);
 
         return (new HospitalJson($updatedHospital))->getResponse();
+    }
+
+    public function delete(int $id): Response
+    {
+        $foundHospital = $this->service->get($id);
+
+        if ($foundHospital === null) {
+            return (new NotFoundJson())->getResponse();
+        }
+
+        $this->service->delete($id);
+
+        return (new EmptyJson())->getResponse();
     }
 }

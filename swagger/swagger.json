@@ -79,7 +79,38 @@
                         }
                     }
                 }
-            }
+            },
+            "delete": {
+                "summary": "Delete hospital by ID",
+                "tags": [
+                    "Hospital"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"                        
+                    },
+                    "404": {
+                        "description": "Hospital not found",
+                        "schema": {
+                            "$ref": "#/definitions/NotFound"
+                        }
+                    }
+                }
+            },
         },
         "/api/hospitals": {
             "post": {

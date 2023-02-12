@@ -56,4 +56,19 @@ class HospitalService extends BaseService {
 
         return $this->get($foundHospital->getId());
     }
+
+    public function delete(int $id): void
+    {
+        $updateStatement = $this->entityManager
+            ->getConnection()
+            ->prepare('UPDATE users SET workplace_id = NULL WHERE id = :id');
+        $updateStatement->bindValue(':id', $id);
+        $updateStatement->executeQuery();
+
+        $deleteStatement = $this->entityManager
+            ->getConnection()
+            ->prepare('DELETE FROM hospitals WHERE id = :id');
+        $deleteStatement->bindValue(':id', $id);
+        $deleteStatement->executeQuery();
+    }
 }

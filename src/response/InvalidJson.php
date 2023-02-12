@@ -2,8 +2,6 @@
 
 namespace Yumerov\CredowebBackendTask\Response;
 
-use Yumerov\CredowebBackendTask\Entity\Hospital;
-
 class InvalidJson
 {
     public function __construct(private array $error) { }
