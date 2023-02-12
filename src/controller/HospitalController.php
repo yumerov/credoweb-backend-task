@@ -6,10 +6,12 @@ use Yumerov\CredowebBackendTask\Request\SaveHospital;
 use Yumerov\CredowebBackendTask\Response\CreatedHospitalJson;
 use Yumerov\CredowebBackendTask\Response\EmptyJson;
 use Yumerov\CredowebBackendTask\Response\HospitalJson;
+use Yumerov\CredowebBackendTask\Response\HospitalListJson;
 use Yumerov\CredowebBackendTask\Response\InvalidJson;
 use Yumerov\CredowebBackendTask\Response\NotFoundJson;
 use Yumerov\CredowebBackendTask\Response\Response;
 use Yumerov\CredowebBackendTask\Service\HospitalService;
+use Yumerov\CredowebBackendTask\Enum\SortOrder;
 
 class HospitalController extends Controller {
 
@@ -75,5 +77,14 @@ class HospitalController extends Controller {
         $this->service->delete($id);
 
         return (new EmptyJson())->getResponse();
+    }
+
+    public function list(): Response
+    {
+        $sort = SortOrder::tryFrom(isset($_GET['sort']) ? strtolower($_GET['sort']) : null);
+
+        $hospitals = $this->service->list($sort);
+
+        return (new HospitalListJson($hospitals))->getResponse();
     }
 }

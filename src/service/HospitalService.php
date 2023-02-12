@@ -3,6 +3,7 @@
 namespace Yumerov\CredowebBackendTask\Service;
 
 use Yumerov\CredowebBackendTask\Entity\Hospital;
+use Yumerov\CredowebBackendTask\Enum\SortOrder;
 use Yumerov\CredowebBackendTask\Interfaces\HospitalInterface;
 use Yumerov\CredowebBackendTask\Request\SaveHospital;
 
@@ -70,5 +71,19 @@ class HospitalService extends BaseService {
             ->prepare('DELETE FROM hospitals WHERE id = :id');
         $deleteStatement->bindValue(':id', $id);
         $deleteStatement->executeQuery();
+    }
+
+    public function list(?SortOrder $sort): array
+    {
+        $sql = "SELECT h.id, h.name, h.address, h.phone, COUNT(u.id) as employees_count"
+            . " FROM hospitals AS h"
+            . " LEFT JOIN users AS u ON u.workplace_id = h.id"
+            . " GROUP BY h.id"
+            . " ORDER BY " . ($sort ? "employees_count " . strtoupper($sort->value) : 'h.id ASC');
+
+        return $this->entityManager
+            ->getConnection()
+            ->executeQuery($sql)
+            ->fetchAllAssociative();
     }
 }

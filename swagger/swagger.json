@@ -110,7 +110,7 @@
                         }
                     }
                 }
-            },
+            }
         },
         "/api/hospitals": {
             "post": {
@@ -134,6 +134,34 @@
                         }
                     }
                 ],
+            },
+            "get": {
+                "summary": "List Hospitals",
+                "tags": [
+                    "Hospital"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort order",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "ASC",
+                                "DESC"
+                            ],
+                            "default": "ASC"
+                        }
+                    }
+                ]
             }
         }
     },

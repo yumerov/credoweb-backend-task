@@ -40,18 +40,17 @@ Currently tested only on Windows 10(and git bash)!
 - - [x] Seed
 - - [x] DSN config
 - - [x] ORM install
-- [ ] Config loading
 - [x] Routing/Http
 - - [x] Core
 - - [x] Handling JSON requests
 - - [x] JSON Responses
 - [ ] Endpoints
-- - [ ] Hospital
+- - [x] Hospital
 - - - [x] Create
 - - - [x] Read
-- - - [ ] Update
-- - - [ ] Delete
-- - - [ ] List hopsitals - ability to order them by employees count
+- - - [x] Update
+- - - [x] Delete
+- - - [x] List hopsitals - ability to order them by employees count
 - - [ ] Users
 - - - [ ] Create
 - - - [ ] Read
@@ -62,6 +61,7 @@ Currently tested only on Windows 10(and git bash)!
 ## Improvements
 
 - [ ] Logger
+- [ ] Config loading
 - [ ] Exceptions
 - [ ] Env handling mechanism
 - [ ] Better namespace structure
