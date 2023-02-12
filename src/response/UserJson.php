@@ -6,7 +6,7 @@ use Yumerov\CredowebBackendTask\Entity\User;
 
 class UserJson
 {
-public function __construct(private User $user) { }
+public function __construct(private User $user, private int $status = 200) { }
 
     public function getResponse(): Response
     {
@@ -23,6 +23,6 @@ public function __construct(private User $user) { }
                 'address' => $this->user->getWorkplace()->getAddress(),
                 'phone' => $this->user->getWorkplace()->getPhone()
             ] : null
-        ]);
+        ], $this->status);
     }
 }

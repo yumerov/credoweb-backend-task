@@ -17,14 +17,14 @@ final class Application {
         
     }
 
-    public function setContainer(Container $container): Application
+    private function setContainer(Container $container): Application
     {
         $this->container = $container;
 
         return $this;
     }
 
-    public function initDataLayer(): self
+    private function initDataLayer(): self
     {
         $entityManager = $this->container->get(DataLayer::class)->init();
         $this->container->add(EntityManager::class, function () use ($entityManager) {
@@ -34,7 +34,7 @@ final class Application {
         return $this;
     }
 
-    public function initValidator(): self
+    private function initValidator(): self
     {
         $this->container->add(ValidatorInterface::class, function () {
             return Validation::createValidator();
@@ -43,12 +43,28 @@ final class Application {
         return $this;
     }
 
+    public function init(Container $container): self
+    {
+        $this
+            ->setContainer($container)
+            ->initDataLayer()
+            ->initValidator();
+
+        return $this;
+    }
+
     public function run(): self
     {
-        $this->container
-            ->get(Dispatcher::class)
-            ->setContainer($this->container)
-            ->dispatch();
+        try {
+            $this->container
+                ->get(Dispatcher::class)
+                ->setContainer($this->container)
+                ->dispatch();
+        } catch (\Exception $ex) {
+            http_response_code(500);
+            header('Content-Type: application/json');
+            echo json_encode(['message' => $ex->getMessage()]);
+        }
 
         return $this;
     }

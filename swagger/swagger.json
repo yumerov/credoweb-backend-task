@@ -230,6 +230,30 @@
                     }
                 }
             }
+        },
+        "/api/users": {
+            "post": {
+                "summary": "Create User",
+                "tags": [
+                    "User"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateUser"
+                        }
+                    }
+                ]
+            }
         }
     },
     "definitions": {
@@ -244,6 +268,26 @@
                 },
                 "phone": {
                     "type": "string"
+                }
+            }
+        },
+        "CreateUser": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "workplaceId": {
+                    "type": "integer"
                 }
             }
         },

@@ -4,6 +4,7 @@ namespace Yumerov\CredowebBackendTask\Service;
 
 use Yumerov\CredowebBackendTask\Entity\Hospital;
 use Yumerov\CredowebBackendTask\Entity\User;
+use Yumerov\CredowebBackendTask\Interfaces\UserInterface;
 
 class UserService extends BaseService {
 
@@ -61,18 +62,22 @@ class UserService extends BaseService {
         return $user;
     }
 
-    public function save(User $user)
+    public function save(UserInterface $user): User
     {
+        $sql = 'INSERT INTO users(first_name, last_name, email, "type", workplace_id)
+                VALUES (:firstName, :lastName, :email, :type, :workplace)';
+
         $statement = $this->entityManager
             ->getConnection()
-            ->prepare('INSERT INTO users(first_name, last_name, email, "type", workplace_id)
-                VALUES (:firstName, :lastName, :email, :type, :workplace)');
+            ->prepare($sql);
         $statement->bindValue(':firstName', $user->getFirstName());
         $statement->bindValue(':lastName', $user->getLastName());
         $statement->bindValue(':email', $user->getEmail());
         $statement->bindValue(':type', $user->getType());
-        $statement->bindValue(':workplace', $user->getWorkplace() ? $user->getWorkplace()->getId() : null);
+        $statement->bindValue(':workplace', $user->getWorkplace()?->getId());
         $statement->executeQuery();
+
+        return $this->get($this->entityManager->getConnection()->lastInsertId());
     }
 
     public function delete(int $id): void

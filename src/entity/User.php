@@ -3,12 +3,13 @@
 namespace Yumerov\CredowebBackendTask\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Yumerov\CredowebBackendTask\Interfaces\UserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id

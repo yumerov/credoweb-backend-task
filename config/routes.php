@@ -11,5 +11,6 @@ return [
     ['DELETE', '/api/hospitals/{id}', [HospitalController::class, 'delete']],
 
     ['GET', '/api/users/{id}', [UserController::class, 'read']],
+    ['POST', '/api/users', [UserController::class, 'create']],
     ['DELETE', '/api/users/{id}', [UserController::class, 'delete']],
 ];
