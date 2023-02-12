@@ -3,9 +3,10 @@
 namespace Yumerov\CredowebBackendTask;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use League\Container\Container;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Yumerov\CredowebBackendTask\Routing\Dispatcher;
+use Symfony\Component\Validator\Validation;
 
 final class Application {
 
@@ -28,6 +29,15 @@ final class Application {
         $entityManager = $this->container->get(DataLayer::class)->init();
         $this->container->add(EntityManager::class, function () use ($entityManager) {
             return $entityManager;
+        });
+
+        return $this;
+    }
+
+    public function initValidator(): self
+    {
+        $this->container->add(ValidatorInterface::class, function () {
+            return Validation::createValidator();
         });
 
         return $this;

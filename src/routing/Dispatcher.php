@@ -5,6 +5,7 @@ namespace Yumerov\CredowebBackendTask\Routing;
 use Doctrine\ORM\EntityManager;
 use FastRoute\RouteCollector;
 use League\Container\Container;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Yumerov\CredowebBackendTask\Response\ResponseHandler;
 use Yumerov\CredowebBackendTask\Service\HospitalService;
 
@@ -51,6 +52,7 @@ class Dispatcher {
                 $vars = $routeInfo[2];
                 $controller = $this->container->get($class);
                 $controller->setRequest(json_decode(file_get_contents('php://input')));
+                $controller->setValidator($this->container->get(ValidatorInterface::class));
                 $action = [$controller, $method];
                 $response = call_user_func_array($action, $vars);
                 $this->responseHandler->handle($response);
