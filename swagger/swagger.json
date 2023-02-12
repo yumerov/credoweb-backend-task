@@ -163,6 +163,42 @@
                     }
                 ]
             }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "summary": "Get user by ID",
+                "tags": [
+                    "User"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/UserHospital"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "$ref": "#/definitions/NotFound"
+                        }
+                    }
+                }
+            },
         }
     },
     "definitions": {
@@ -194,6 +230,46 @@
                 },
                 "phone": {
                     "type": "string"
+                }
+            }
+        },
+        "ReadUser": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "date"
+                },
+                "workplace": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "address": {
+                            "type": "string"
+                        },
+                        "phone": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
