@@ -9,9 +9,9 @@ class Controller {
 
     use ValidatorTrait;
 
-    protected stdClass $request;
+    protected ?stdClass $request;
 
-    public function setRequest(stdClass $request)
+    public function setRequest(?stdClass $request)
     {
         $this->request = $request;
     }

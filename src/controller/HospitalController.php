@@ -29,14 +29,37 @@ class HospitalController extends Controller {
     {
         $request = new SaveHospital($this->request);
 
-        $error = $this->validate($request);
+        // TODO: uncomment when validation begins to work
+        // $error = $this->validate($request);
 
-        if ($error !== null) {
-            return (new InvalidJson($error))->getResponse();
-        }
+        // if ($error !== null) {
+        //     return (new InvalidJson($error))->getResponse();
+        // }
 
         $createdHospital = $this->service->save($request);
 
         return (new CreatedHospitalJson($createdHospital))->getResponse();
+    }
+
+    public function update(int $id): Response
+    {
+        $foundHospital = $this->service->get($id);
+
+        if ($foundHospital === null) {
+            return (new NotFoundJson())->getResponse();
+        }
+
+        // TODO: uncomment when validation begins to work
+        // $error = $this->validate($request);
+
+        // if ($error !== null) {
+        //     return (new InvalidJson($error))->getResponse();
+        // }
+
+        $saveHospital = new SaveHospital($this->request);
+
+        $updatedHospital = $this->service->update($foundHospital, $saveHospital);
+
+        return (new HospitalJson($updatedHospital))->getResponse();
     }
 }

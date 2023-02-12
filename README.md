@@ -22,7 +22,8 @@ Currently tested only on Windows 10(and git bash)!
 - Using php instead of yaml to save dev time
 - Using sql queries instead of Doctrine entities to save dev time
 - Using same database for dev and testing purposes
-- Using json instead of annotations to save dev time
+- Using json for swagger instead of annotations to save dev time
+- Not using transactions on save endpoints to save dev time
 
 ## Testing
 

@@ -37,6 +37,48 @@
                         }
                     }
                 }
+            },
+            "put": {
+                "summary": "Update hospital by ID",
+                "tags": [
+                    "Hospital"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateHospital"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/ReadHospital"
+                        }
+                    },
+                    "404": {
+                        "description": "Hospital not found",
+                        "schema": {
+                            "$ref": "#/definitions/NotFound"
+                        }
+                    }
+                }
             }
         },
         "/api/hospitals": {

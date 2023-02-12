@@ -40,11 +40,20 @@ class HospitalService extends BaseService {
         $statement->bindValue(':phone', $hospital->getPhone());
         $statement->executeQuery();
 
-        $savedHospital = new Hospital();
-        $savedHospital->setId($this->entityManager->getConnection()->lastInsertId());
-        $savedHospital->setName($hospital->getName());
-        $savedHospital->setAddress($hospital->getAddress());
-        $savedHospital->setPhone($hospital->getPhone());
-        return $savedHospital;
+        return $this->get($this->entityManager->getConnection()->lastInsertId());
+    }
+
+    public function update(Hospital $foundHospital, SaveHospital $updateHospital): Hospital
+    {
+        $statement = $this->entityManager
+            ->getConnection()
+            ->prepare('UPDATE hospitals SET name = :name, address = :address, phone = :phone WHERE id = :id');
+        $statement->bindValue(':name', $updateHospital->getName() ?? $foundHospital->getName());
+        $statement->bindValue(':address', $updateHospital->getAddress() ?? $foundHospital->getAddress());
+        $statement->bindValue(':phone', $updateHospital->getPhone() ?? $foundHospital->getPhone());
+        $statement->bindValue(':id', $foundHospital->getId());
+        $statement->executeQuery();
+
+        return $this->get($foundHospital->getId());
     }
 }
